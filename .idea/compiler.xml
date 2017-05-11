@@ -22,11 +22,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="SCR" />
+        <module name="back-view" />
+        <module name="domain" />
+        <module name="utils" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="back-view" target="1.5" />
+      <module name="domain" target="1.5" />
       <module name="SCR" target="1.5" />
+      <module name="utils" target="1.5" />
+      <module name="web" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
