@@ -11,6 +11,9 @@
         <module>back-view</module>
         <module>domain</module>
         <module>utils</module>
+        <module>Service</module>
+        <module>Service-Impl</module>
+        <module>dao</module>
     </modules>
     <packaging>pom</packaging>
     <name>SCR</name>

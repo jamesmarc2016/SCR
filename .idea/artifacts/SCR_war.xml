@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SCR:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SCR-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="SCR:war exploded" />
+    </root>
+  </artifact>
+</component>
