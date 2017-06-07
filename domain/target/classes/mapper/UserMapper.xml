@@ -13,4 +13,12 @@
         FROM user
         WHERE username = #{username}
     </select>
+
+    <!-- 更新用户 -->
+    <update id="update" parameterType="com.tangxinhui.domain.User">
+        UPDATE user
+        SET
+            lasttime = #{lasttime}
+        WHERE id = #{id}
+    </update>
 </mapper>

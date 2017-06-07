@@ -1,2 +1,7 @@
 com\tangxinhui\constant\Constants.class
+com\tangxinhui\constant\StringUtil.class
 com\tangxinhui\constant\PageMessageUtil.class
+com\tangxinhui\constant\CommonDate.class
+com\tangxinhui\constant\LogUtil.class
+com\tangxinhui\constant\DigestUtil.class
+com\tangxinhui\constant\NetUtil.class

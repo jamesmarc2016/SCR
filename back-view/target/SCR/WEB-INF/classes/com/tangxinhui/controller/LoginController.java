@@ -1,9 +1,9 @@
 package com.tangxinhui.controller;
 
-import com.tangxinhui.constant.Constants;
-import com.tangxinhui.constant.DigestUtil;
-import com.tangxinhui.constant.PageMessageUtil;
+import com.tangxinhui.constant.*;
+import com.tangxinhui.domain.Log;
 import com.tangxinhui.domain.User;
+import com.tangxinhui.service.LogService;
 import com.tangxinhui.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -25,13 +25,21 @@ public class LoginController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private LogService logService;
 
     /**
      * 登录界面
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
+    public String login(HttpServletRequest request) {
+        String time = CommonDate.getTime24();
+        String ip = NetUtil.getIpAddress(request);
+
+        Log log = LogUtil.setLog(null,time,Constants.LOG_TYPE_LOGIN,Constants.LOG_TYPE_LOGIN,ip);
+        logService.insert(log);
+
         return "login";
     }
 
@@ -43,6 +51,13 @@ public class LoginController {
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
+
+        String time = CommonDate.getTime24();
+        String ip = NetUtil.getIpAddress(request);
+
+        Log log = LogUtil.setLog((String)session.getAttribute("userid"),time,Constants.LOG_TYPE_LOGOUT,Constants.LOG_TYPE_LOGOUT,ip);
+        logService.insert(log);
+
         session.removeAttribute("userid");
         session.removeAttribute("login_status");
         PageMessageUtil.writeMessageToSession(request,Constants.LOGOUT_SUCCESS);
@@ -80,29 +95,18 @@ public class LoginController {
             return "redirect:/user/login";
         }
 
+        String time = CommonDate.getTime24();
+        String ip = NetUtil.getIpAddress(request);
+
+        Log log = LogUtil.setLog(userDb.getId(),time,Constants.LOG_TYPE_LOGIN,Constants.LOG_DETAIL_USER_LOGIN,ip);
+        logService.insert(log);
+
+        session.setAttribute("userid", user.getUsername());
+        session.setAttribute("login_status", true);
+        userDb.setLasttime(CommonDate.getTime24());
+        userService.update(user);
+
         PageMessageUtil.writeMessageToSession(request,Constants.LOGIN_SUCCESS);
         return "redirect:/chat";
-
-//        User user = userService.selectUserByUserid(userid);
-//        if (user == null) {
-//        } else {
-//            if (!user.getPassword().equals(password)) {
-//                attributes.addFlashAttribute("error", defined.LOGIN_PASSWORD_ERROR);
-//                return "redirect:/user/login";
-//            } else {
-//                if (user.getStatus() != 1) {
-//                    attributes.addFlashAttribute("error", defined.LOGIN_USERID_DISABLED);
-//                    return "redirect:/user/login";
-//                } else {
-//                    logService.insert(logUtil.setLog(userid, date.getTime24(), defined.LOG_TYPE_LOGIN, defined.LOG_DETAIL_USER_LOGIN, netUtil.getIpAddress(request)));
-//                    session.setAttribute("userid", userid);
-//                    session.setAttribute("login_status", true);
-//                    user.setLasttime(date.getTime24());
-//                    userService.update(user);
-//                    attributes.addFlashAttribute("message", defined.LOGIN_SUCCESS);
-//                    return "redirect:/chat";
-//                }
-//            }
-//        }
     }
 }

@@ -16,4 +16,11 @@ public interface UserDao {
      * @return
      */
     User selectUserByUserName(String userName);
+
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
+    boolean update(User user);
 }

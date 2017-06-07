@@ -24,4 +24,8 @@ public class UserServiceImpl implements UserService{
     public User selectUserByUserName(String userName) {
         return userDao.selectUserByUserName(userName);
     }
+
+    public boolean update(User user) {
+        return userDao.update(user);
+    }
 }

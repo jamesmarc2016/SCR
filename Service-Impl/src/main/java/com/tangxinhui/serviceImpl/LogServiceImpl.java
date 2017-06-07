@@ -1,8 +1,10 @@
 package com.tangxinhui.serviceImpl;
 
+import com.tangxinhui.constant.StringUtil;
 import com.tangxinhui.dao.LogDao;
 import com.tangxinhui.domain.Log;
 import com.tangxinhui.service.LogService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 /**
  * Created by xinhu on 2017/5/16.
  */
+@Service(value = "logService")
 public class LogServiceImpl implements LogService{
 
     @Resource
@@ -40,7 +43,7 @@ public class LogServiceImpl implements LogService{
     }
 
     public boolean insert(Log log) {
-        log.setId(StringUtil.getGuid());
+        log.setId(StringUtil.getUuid());
         return logDao.insert(log);
     }
 

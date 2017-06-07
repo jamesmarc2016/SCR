@@ -10,6 +10,6 @@ public interface UserService {
     User selectUserByUserName(String userName);
 //    int selectCount(int pageSize);
 //    boolean insert(User user);
-//    boolean update(User user);
+    boolean update(User user);
 //    boolean delete(String userid);
 }

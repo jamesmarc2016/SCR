@@ -7,17 +7,16 @@ import com.tangxinhui.domain.base.BaseBean;
  * Created by xinhu on 2017/5/10.
  */
 public class User extends BaseBean{
-    private String ip;
     private String username;
     private String password;
+    private String lasttime;    //最后登录时间
 
-
-    public String getIp() {
-        return ip;
+    public String getLasttime() {
+        return lasttime;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setLasttime(String lasttime) {
+        this.lasttime = lasttime;
     }
 
     public String getUsername() {
